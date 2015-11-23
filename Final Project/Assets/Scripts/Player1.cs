@@ -10,7 +10,17 @@ public class Player1 : MonoBehaviour {
 	public int lives;
 
 	public Bullet bullet;
-	
+	public Enemy enemy;
+
+	public bool isShooting;
+
+	public bool movingLeft;
+	public bool movingRight;
+	public bool movingUp;
+	public bool movingDown;
+
+	private int randomVar;
+
 	// Use this for initialization
 	void Start () {
 		currentHealth = maxHealth;
@@ -28,31 +38,50 @@ public class Player1 : MonoBehaviour {
 
 		if (lives == 0) {
 			gameObject.SetActive(false);
+
+			// stop spawning enemies
+
 		}
 
 		// shoot
 		if (Input.GetKeyDown (KeyCode.R)) {
-			Shoot();
+			Shoot ();
+			isShooting = true;
+		} else {
+			isShooting = false;
 		}
 		
 		// player movement
-		if (Input.GetKey(KeyCode.W))
-		{
+		// change player movement to addforce
+		if (Input.GetKey (KeyCode.W)) {
 			transform.position += transform.forward * Time.deltaTime * moveSpeed;
+			movingUp = true;
+		} else {
+			movingUp = false;
 		}
 		
-		if (Input.GetKey(KeyCode.S))
-		{
+		if (Input.GetKey (KeyCode.S)) {
 			transform.position += -transform.forward * Time.deltaTime * moveSpeed;
+			movingDown = true;
+
+		} else {
+			movingDown = false;
 		}
 		
-		if (Input.GetKey (KeyCode.A))
-		{
+		if (Input.GetKey (KeyCode.A)) {
+			// change to rotation
 			transform.position += -transform.right * Time.deltaTime * moveSpeed;
+			movingLeft = true;
+		} else {
+			movingLeft = false;
 		}
-		if (Input.GetKey (KeyCode.D))
-		{
+
+		if (Input.GetKey (KeyCode.D)) {
+			// change to rotation
 			transform.position += transform.right * Time.deltaTime * moveSpeed;
+			movingRight = true;
+		} else {
+			movingRight = false;
 		}
 		
 	}
@@ -71,6 +100,27 @@ public class Player1 : MonoBehaviour {
 	void Shoot(){
 		// instantiate new bullet and set it equal to newBullet
 		Bullet newBullet = (Bullet) Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
-		newBullet.direction = transform.forward;
+		//newBullet.direction = transform.forward;
+
+		randomVar = Random.Range (0, 3);
+		
+		switch (randomVar) {
+		case 0:
+			newBullet.direction = transform.forward;
+			break;
+			
+		case 1:
+			newBullet.direction = -transform.forward;
+			break;
+
+		case 2:
+			newBullet.direction = transform.right;
+			break;
+
+		case 3:
+			newBullet.direction = -transform.right;
+			break;
+		}
+
 	}
 }

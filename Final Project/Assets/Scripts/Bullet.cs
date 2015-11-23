@@ -5,7 +5,8 @@ public class Bullet : MonoBehaviour {
 	
 	public Vector3 direction;
 	public float bulletSpeed;
-	
+	private int randomVar;
+
 	// Use this for initialization
 	void Start () {
 		Destroy (gameObject, 5.0f);
@@ -13,8 +14,9 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//move in a direction, fast
+
 		transform.position += direction * Time.deltaTime * bulletSpeed;
+
 	}
 	
 	void OnCollisionEnter(Collision col){

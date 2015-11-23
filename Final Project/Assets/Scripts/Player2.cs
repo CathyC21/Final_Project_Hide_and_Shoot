@@ -10,6 +10,14 @@ public class Player2 : MonoBehaviour {
 	public int lives;
 
 	public Bullet bullet;
+	public Enemy2 enemy2;
+
+	public bool isShooting;
+
+	public bool movingLeft;
+	public bool movingRight;
+	public bool movingUp;
+	public bool movingDown;
 
 	// Use this for initialization
 	void Start () {
@@ -30,32 +38,46 @@ public class Player2 : MonoBehaviour {
 		
 		if (lives == 0) {
 			gameObject.SetActive(false);
+
+			// stop spawning enemies
 		}
 
 		// shoot
 		if (Input.GetKeyDown (KeyCode.RightShift)) {
-			Shoot();
+			Shoot ();
+			isShooting = true;
+		} else {
+			isShooting = false;
 		}
 
 
 		// player movement
-		if (Input.GetKey(KeyCode.UpArrow))
-		{
+		// change player movement to addforce
+		if (Input.GetKey (KeyCode.UpArrow)) {
 			transform.position += transform.forward * Time.deltaTime * moveSpeed;
+			movingUp = true;
+		} else {
+			movingUp = false;
 		}
 		
-		if (Input.GetKey(KeyCode.DownArrow))
-		{
+		if (Input.GetKey (KeyCode.DownArrow)) {
 			transform.position += -transform.forward * Time.deltaTime * moveSpeed;
+			movingDown = true;
+		} else {
+			movingDown = false;
 		}
 		
-		if (Input.GetKey (KeyCode.LeftArrow))
-		{
+		if (Input.GetKey (KeyCode.LeftArrow)) {
 			transform.position += -transform.right * Time.deltaTime * moveSpeed;
+			movingLeft = true;
+		} else {
+			movingLeft = false;
 		}
-		if (Input.GetKey (KeyCode.RightArrow))
-		{
+		if (Input.GetKey (KeyCode.RightArrow)) {
 			transform.position += transform.right * Time.deltaTime * moveSpeed;
+			movingRight = true;
+		} else {
+			movingRight = false;
 		}
 
 	}
