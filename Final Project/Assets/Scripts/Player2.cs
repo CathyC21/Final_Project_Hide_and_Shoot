@@ -25,6 +25,7 @@ public class Player2 : MonoBehaviour {
 	public bool canShoot = true;
 
 	public float maxBullets2;
+	public float bulletPower2;
 
 	// Use this for initialization
 	void Start () {
@@ -102,7 +103,7 @@ public class Player2 : MonoBehaviour {
 		}
 		
 		if (col.collider.tag == "Bullet") {
-			currentHealth -= 5;
+			currentHealth -= bulletPower2;
 		}
 	}
 	
