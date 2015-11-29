@@ -26,5 +26,9 @@ public class Bullet : MonoBehaviour {
 			col.collider.gameObject.SetActive(false);
 			Destroy(gameObject);
 		}
+
+		if (col.collider.tag == "Player") {
+			Destroy (gameObject);
+		}
 	}
 }

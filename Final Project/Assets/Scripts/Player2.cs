@@ -3,38 +3,42 @@ using System.Collections;
 
 public class Player2 : MonoBehaviour {
 
-	public float moveSpeed;
-	
+	[Header("Health")]
 	public float currentHealth;
 	public float maxHealth;
 	public int lives;
-
-	public Bullet bullet;
-	public Enemy2 enemy2;
-
-	public bool isShooting;
-
+	
+	[Header("Movement")]
+	public float moveSpeed;
 	public bool movingLeft;
 	public bool movingRight;
 	public bool movingUp;
 	public bool movingDown;
-
 	public float rotationSpeed;
-
-	public int bulletCounter;
+	
+	[Header("Bullets")]
+	public Bullet bullet;
+	public bool isShooting;
+	public int bulletCounter = 10;
 	public bool canShoot = true;
-
 	public float maxBullets2;
 	public float bulletPower2;
-
-	public bool bulletReset = false;
+	public bool bulletReset;
+	
+	[Header("Enemy")]
+	public Enemy2 enemy2;
+	
+	[Header("Music")]
+	public AudioSource sfx;
+	public AudioClip sfx_gun;
+	public AudioClip death;
 
 	// Use this for initialization
 	void Start () {
-	
 		currentHealth = maxHealth;
 		lives = 3;
-
+		bulletReset = false;
+		bulletCounter = 10;
 	}
 	
 	// Update is called once per frame
@@ -43,10 +47,13 @@ public class Player2 : MonoBehaviour {
 		// lives and death
 		if (currentHealth <= 0) {
 			lives -= 1;
+			sfx.clip = death;
+			sfx.Play ();
+
 			currentHealth = maxHealth;
 
 			// if player dies, reset bullets
-			bulletCounter = 0;
+			bulletCounter = 10;
 			bulletReset = true;
 			canShoot = true;
 
@@ -64,12 +71,15 @@ public class Player2 : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.RightShift)) {
 			Shoot ();
 			isShooting = true;
+			//sound 
+			sfx.clip = sfx_gun;
+			sfx.Play();
 		} else {
 			isShooting = false;
 		}
 
 		// track how many bullets player has used
-		if (bulletCounter >= maxBullets2) {
+		if (bulletCounter <= 0) {
 			canShoot = false;
 		}
 
@@ -124,7 +134,7 @@ public class Player2 : MonoBehaviour {
 			// instantiate new bullet and set it equal to newBullet
 			Bullet newBullet = (Bullet)Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
 			newBullet.direction = transform.forward;
-			bulletCounter += 1;
+			bulletCounter -= 1;
 			
 		} else {
 			

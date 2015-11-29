@@ -81,7 +81,7 @@ public class Enemy2 : MonoBehaviour {
 		}
 		
 		transform.position += transform.forward * Time.deltaTime * moveSpeed * forward;
-		transform.position += transform.right * Time.deltaTime * moveSpeed * right;
+		transform.position += -transform.right * Time.deltaTime * moveSpeed * down;
 		
 		transform.RotateAround(transform.position, transform.up, -rotationSpeed * left);
 		transform.RotateAround(transform.position, transform.up, rotationSpeed * right);
@@ -92,27 +92,27 @@ public class Enemy2 : MonoBehaviour {
 	void Shoot(){
 		// instantiate new bullet and set it equal to newBullet
 		Bullet newBullet = (Bullet) Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
-		//newBullet.direction = transform.forward;
+		newBullet.direction = transform.forward;
 
-		randomVar = Random.Range (0, 3);
+//		randomVar = Random.Range (0, 3);
 		
-		switch (randomVar) {
-		case 0:
-			newBullet.direction = transform.forward;
-			break;
-			
-		case 1:
-			newBullet.direction = -transform.forward;
-			break;
-			
-		case 2:
-			newBullet.direction = transform.right;
-			break;
-			
-		case 3:
-			newBullet.direction = -transform.right;
-			break;
-		}
+//		switch (randomVar) {
+//		case 0:
+//			newBullet.direction = transform.forward;
+//			break;
+//			
+//		case 1:
+//			newBullet.direction = -transform.forward;
+//			break;
+//			
+//		case 2:
+//			newBullet.direction = transform.right;
+//			break;
+//			
+//		case 3:
+//			newBullet.direction = -transform.right;
+//			break;
+//		}
 	}
 
 	void OnCollisionEnter (Collision col){

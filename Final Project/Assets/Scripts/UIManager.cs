@@ -18,8 +18,13 @@ public class UIManager : MonoBehaviour {
 	public Image[] p1lives;
 	public Image[] p2lives;
 
-	public Image[] p1bullets;
-	public Image[] p2bullets;
+	public Image p1bullet;
+	public Image p2bullet;
+
+	public Text p1bullets;
+	public Text p2bullets;
+
+	public int maxBullets;
 
 
 	// Use this for initialization
@@ -72,53 +77,19 @@ public class UIManager : MonoBehaviour {
 		}
 
 		// if player1 uses bullet, remove from UI
-		if (player1.bulletCounter == 1) {
-			p1bullets [0].enabled = false;
-
-		} else if (player1.bulletCounter == 2) {
-			p1bullets [1].enabled = false;
-
-		} else if (player1.bulletCounter == 3) {
-			p1bullets [2].enabled = false;
-
-		} else if (player1.bulletCounter == 4) {
-			p1bullets [3].enabled = false;
-		} else if (player1.bulletCounter == 5) {
-			p1bullets[4].enabled = false;
-		}
+		p1bullets.text = player1.bulletCounter + " ";
 
 		// if bullets have been reset, display again
 		if (player1.bulletReset) {
-			p1bullets[0].enabled = true;
-			p1bullets[1].enabled = true;
-			p1bullets[2].enabled = true;
-			p1bullets[3].enabled = true;
-			p1bullets[4].enabled = true;
+			player1.bulletCounter = maxBullets;
 		}
 
 
 		// if player2 uses bullet, remove from UI
-		if (player2.bulletCounter == 1) {
-			p2bullets[0].enabled = false;
-			
-		} else if (player2.bulletCounter == 2) {
-			p2bullets[1].enabled = false;
-			
-		} else if (player2.bulletCounter == 3) {
-			p2bullets[2].enabled = false;
-			
-		} else if (player2.bulletCounter == 4) {
-			p2bullets[3].enabled = false;
-		} else if (player2.bulletCounter == 5) {
-			p2bullets[4].enabled = false;
-		}
+		p2bullets.text = player2.bulletCounter + " ";
 
 		if (player2.bulletReset) {
-			p2bullets[0].enabled = true;
-			p2bullets[1].enabled = true;
-			p2bullets[2].enabled = true;
-			p2bullets[3].enabled = true;
-			p2bullets[4].enabled = true;
+			player2.bulletCounter = maxBullets;
 		}
 
 	}

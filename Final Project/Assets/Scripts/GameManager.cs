@@ -6,10 +6,12 @@ public class GameManager : MonoBehaviour {
 	public Player1 player1;
 	public Player2 player2;
 	
-	public Enemy enemy1;
+	public Enemy1 enemy1;
 	public Enemy2 enemy2;
 	
 	public Transform[] spawnPoints;
+
+	private int randomPlace;
 	
 	// Use this for initialization
 	void Start () {
@@ -28,9 +30,21 @@ public class GameManager : MonoBehaviour {
 	
 	void spawnEnemy() {
 		//we could randomize between basic enemy and fierce enemy
-		
-		Enemy newEnemy = (Enemy)Instantiate (enemy1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
 
+		//something irrelevant for now, that we can potentially use later
+		randomPlace = Random.Range (0, 1);
+		switch (randomPlace) {
+		case 0:
+
+
+			break;
+		case 1:
+
+
+			break;
+		}
+		
+		Enemy1 newEnemy = (Enemy1)Instantiate (enemy1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
 		Enemy2 newEnemy2 = (Enemy2)Instantiate (enemy2, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
 
 		newEnemy.gameObject.SetActive (true);

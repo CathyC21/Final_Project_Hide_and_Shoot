@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy1 : MonoBehaviour {
 	
 	public float moveSpeed; // how quickly enemies will move, should be identical to the player's moveSpeed
 	public float laziness; // how likely an emeny is to not move from 0 to 1
