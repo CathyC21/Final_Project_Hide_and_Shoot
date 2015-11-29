@@ -19,6 +19,13 @@ public class Player2 : MonoBehaviour {
 	public bool movingUp;
 	public bool movingDown;
 
+	public float rotationSpeed;
+
+	public int bulletCounter;
+	public bool canShoot = true;
+
+	public float maxBullets2;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -50,6 +57,11 @@ public class Player2 : MonoBehaviour {
 			isShooting = false;
 		}
 
+		// track how many bullets player has used
+		if (bulletCounter >= maxBullets2) {
+			canShoot = false;
+		}
+
 
 		// player movement
 		// change player movement to addforce
@@ -68,13 +80,13 @@ public class Player2 : MonoBehaviour {
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			transform.position += -transform.right * Time.deltaTime * moveSpeed;
+			transform.RotateAround(transform.position, transform.up, -rotationSpeed);
 			movingLeft = true;
 		} else {
 			movingLeft = false;
 		}
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			transform.position += transform.right * Time.deltaTime * moveSpeed;
+			transform.RotateAround(transform.position, transform.up, rotationSpeed);
 			movingRight = true;
 		} else {
 			movingRight = false;
@@ -96,7 +108,15 @@ public class Player2 : MonoBehaviour {
 	
 	void Shoot(){
 		// instantiate new bullet and set it equal to newBullet
-		Bullet newBullet = (Bullet) Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
-		newBullet.direction = transform.forward;
+		if (canShoot == true) {
+			
+			// instantiate new bullet and set it equal to newBullet
+			Bullet newBullet = (Bullet)Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
+			newBullet.direction = transform.forward;
+			bulletCounter += 1;
+			
+		} else {
+			
+		}
 	}
 }

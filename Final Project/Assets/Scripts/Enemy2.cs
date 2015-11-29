@@ -28,7 +28,7 @@ public class Enemy2 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (player2.isShooting == true) {
+		if (player2.isShooting && player2.canShoot) {
 			Shoot ();
 		} else  {
 			

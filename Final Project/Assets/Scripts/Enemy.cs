@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour {
 	private int forward = 0;
 	private int right = 0;
 
-
 	private int down = 0;
 	private int left = 0;
 	
@@ -26,7 +25,7 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (player1.isShooting == true) {
+		if (player1.isShooting && player1.canShoot) {
 			Shoot ();
 		} else  {
 
@@ -79,9 +78,9 @@ public class Enemy : MonoBehaviour {
 		}
 
 		transform.position += transform.forward * Time.deltaTime * moveSpeed * forward;
-		transform.position += transform.right * Time.deltaTime * moveSpeed * right;
-
 		transform.position += -transform.forward * Time.deltaTime * moveSpeed * down;
+
+		transform.position += transform.right * Time.deltaTime * moveSpeed * right;
 		transform.position += -transform.right * Time.deltaTime * moveSpeed * left;
 
 		
@@ -91,6 +90,7 @@ public class Enemy : MonoBehaviour {
 		// instantiate new bullet and set it equal to newBullet
 		Bullet newBullet = (Bullet) Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
 		newBullet.direction = transform.forward;
+
 	}
 
 	void OnCollisionEnter (Collision col){

@@ -19,7 +19,14 @@ public class Player1 : MonoBehaviour {
 	public bool movingUp;
 	public bool movingDown;
 
+	public float rotationSpeed;
+
 	private int randomVar;
+
+	public int bulletCounter;
+	public bool canShoot = true;
+
+	public float maxBullets1;
 
 	// Use this for initialization
 	void Start () {
@@ -50,6 +57,11 @@ public class Player1 : MonoBehaviour {
 		} else {
 			isShooting = false;
 		}
+
+		// track how many bullets player has used
+		if (bulletCounter >= maxBullets1) {
+			canShoot = false;
+		}
 		
 		// player movement
 		// change player movement to addforce
@@ -70,7 +82,8 @@ public class Player1 : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.A)) {
 			// change to rotation
-			transform.position += -transform.right * Time.deltaTime * moveSpeed;
+			transform.RotateAround(transform.position, transform.up, -rotationSpeed);
+			//transform.position += -transform.right * Time.deltaTime * moveSpeed;
 			movingLeft = true;
 		} else {
 			movingLeft = false;
@@ -78,7 +91,8 @@ public class Player1 : MonoBehaviour {
 
 		if (Input.GetKey (KeyCode.D)) {
 			// change to rotation
-			transform.position += transform.right * Time.deltaTime * moveSpeed;
+			transform.RotateAround(transform.position, transform.up, rotationSpeed);
+			//transform.position += transform.right * Time.deltaTime * moveSpeed;
 			movingRight = true;
 		} else {
 			movingRight = false;
@@ -98,28 +112,16 @@ public class Player1 : MonoBehaviour {
 	}
 	
 	void Shoot(){
-		// instantiate new bullet and set it equal to newBullet
-		Bullet newBullet = (Bullet) Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
-		//newBullet.direction = transform.forward;
 
-		randomVar = Random.Range (0, 3);
-		
-		switch (randomVar) {
-		case 0:
+		if (canShoot == true) {
+
+			// instantiate new bullet and set it equal to newBullet
+			Bullet newBullet = (Bullet)Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
 			newBullet.direction = transform.forward;
-			break;
-			
-		case 1:
-			newBullet.direction = -transform.forward;
-			break;
+			bulletCounter += 1;
 
-		case 2:
-			newBullet.direction = transform.right;
-			break;
+		} else {
 
-		case 3:
-			newBullet.direction = -transform.right;
-			break;
 		}
 
 	}
