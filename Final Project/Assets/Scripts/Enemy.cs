@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour {
 
 	private int down = 0;
 	private int left = 0;
+
+	public float rotationSpeed;
 	
 	// Use this for initialization
 	void Start () {
@@ -80,9 +82,8 @@ public class Enemy : MonoBehaviour {
 		transform.position += transform.forward * Time.deltaTime * moveSpeed * forward;
 		transform.position += -transform.forward * Time.deltaTime * moveSpeed * down;
 
-		transform.position += transform.right * Time.deltaTime * moveSpeed * right;
-		transform.position += -transform.right * Time.deltaTime * moveSpeed * left;
-
+		transform.RotateAround(transform.position, transform.up, -rotationSpeed * left);
+		transform.RotateAround(transform.position, transform.up, rotationSpeed * right);
 		
 	}
 

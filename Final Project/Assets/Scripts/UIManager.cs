@@ -68,22 +68,34 @@ public class UIManager : MonoBehaviour {
 			p2lives[2].enabled = false;
 			player2.currentHealth = 0;
 			fill2.color = Color.gray;
-			
+
 		}
 
 		// if player1 uses bullet, remove from UI
 		if (player1.bulletCounter == 1) {
-			p1bullets[0].enabled = false;
+			p1bullets [0].enabled = false;
 
 		} else if (player1.bulletCounter == 2) {
-			p1bullets[1].enabled = false;
+			p1bullets [1].enabled = false;
 
 		} else if (player1.bulletCounter == 3) {
-			p1bullets[2].enabled = false;
+			p1bullets [2].enabled = false;
 
 		} else if (player1.bulletCounter == 4) {
-			p1bullets[3].enabled = false;
+			p1bullets [3].enabled = false;
+		} else if (player1.bulletCounter == 5) {
+			p1bullets[4].enabled = false;
 		}
+
+		// if bullets have been reset, display again
+		if (player1.bulletReset) {
+			p1bullets[0].enabled = true;
+			p1bullets[1].enabled = true;
+			p1bullets[2].enabled = true;
+			p1bullets[3].enabled = true;
+			p1bullets[4].enabled = true;
+		}
+
 
 		// if player2 uses bullet, remove from UI
 		if (player2.bulletCounter == 1) {
@@ -97,6 +109,16 @@ public class UIManager : MonoBehaviour {
 			
 		} else if (player2.bulletCounter == 4) {
 			p2bullets[3].enabled = false;
+		} else if (player2.bulletCounter == 5) {
+			p2bullets[4].enabled = false;
+		}
+
+		if (player2.bulletReset) {
+			p2bullets[0].enabled = true;
+			p2bullets[1].enabled = true;
+			p2bullets[2].enabled = true;
+			p2bullets[3].enabled = true;
+			p2bullets[4].enabled = true;
 		}
 
 	}

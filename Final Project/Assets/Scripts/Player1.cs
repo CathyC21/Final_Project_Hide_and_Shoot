@@ -29,10 +29,13 @@ public class Player1 : MonoBehaviour {
 	public float maxBullets1;
 	public float bulletPower1;
 
+	public bool bulletReset;
+
 	// Use this for initialization
 	void Start () {
 		currentHealth = maxHealth;
 		lives = 3;
+		bulletReset = false;
 	}
 	
 	// Update is called once per frame
@@ -42,10 +45,19 @@ public class Player1 : MonoBehaviour {
 		if (currentHealth <= 0) {
 			lives -= 1;
 			currentHealth = maxHealth;
+
+			// if player dies, reset bullets
+			bulletCounter = 0;
+			bulletReset = true;
+			canShoot = true;
+
+		} else {
+			bulletReset = false;
 		}
 
 		if (lives == 0) {
 			gameObject.SetActive(false);
+
 
 			// stop spawning enemies
 

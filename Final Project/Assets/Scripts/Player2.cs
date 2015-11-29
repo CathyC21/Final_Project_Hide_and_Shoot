@@ -27,6 +27,8 @@ public class Player2 : MonoBehaviour {
 	public float maxBullets2;
 	public float bulletPower2;
 
+	public bool bulletReset = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -42,6 +44,14 @@ public class Player2 : MonoBehaviour {
 		if (currentHealth <= 0) {
 			lives -= 1;
 			currentHealth = maxHealth;
+
+			// if player dies, reset bullets
+			bulletCounter = 0;
+			bulletReset = true;
+			canShoot = true;
+
+		} else {
+			bulletReset = false;
 		}
 		
 		if (lives == 0) {
