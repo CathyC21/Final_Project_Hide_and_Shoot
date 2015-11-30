@@ -24,6 +24,8 @@ public class Player1 : MonoBehaviour {
 	public float maxBullets1;
 	public float bulletPower1;
 	public bool bulletReset;
+	public bool collectedAmmo = false;
+	public int ammo;
 
 	[Header("Enemy")]
 	public Enemy1 enemy;
@@ -129,6 +131,12 @@ public class Player1 : MonoBehaviour {
 
 		if (col.collider.tag == "Bullet") {
 			currentHealth -= bulletPower1;
+		}
+
+		if (col.collider.tag == "Ammo") {
+			collectedAmmo = true;
+		} else {
+
 		}
 	}
 	

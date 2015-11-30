@@ -84,6 +84,10 @@ public class UIManager : MonoBehaviour {
 			player1.bulletCounter = maxBullets;
 		}
 
+		// if player1 collects ammo 
+		if (player1.collectedAmmo) {
+			player1.bulletCounter += player1.ammo;
+		}
 
 		// if player2 uses bullet, remove from UI
 		p2bullets.text = player2.bulletCounter + " ";
@@ -92,10 +96,5 @@ public class UIManager : MonoBehaviour {
 			player2.bulletCounter = maxBullets;
 		}
 
-	}
-
-	void OnTrigerEnter(Collider myTrigger) {
-		// if a player collects a life, restore 20 health
-
-	}
+	}	
 }
