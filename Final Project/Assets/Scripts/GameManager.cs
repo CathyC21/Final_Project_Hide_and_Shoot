@@ -12,11 +12,19 @@ public class GameManager : MonoBehaviour {
 	public Transform[] spawnPoints;
 
 	private int randomPlace;
+
+	public float left;
+	public float right;
 	
 	// Use this for initialization
 	void Start () {
 		
 		InvokeRepeating ("spawnEnemy", 1.0f, 5.0f);
+
+		// move players to random position
+		player1.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
+		player2.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
+	
 	}
 	
 	// Update is called once per frame
@@ -27,28 +35,24 @@ public class GameManager : MonoBehaviour {
 		}
 		
 	}
+
+//	void spawnPlayers() {
+//		Player1 newPlayer = (Player1)Instantiate (player1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
+//		Player2 newPlayer2 = (Player2)Instantiate (player1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
+//
+//	}
 	
 	void spawnEnemy() {
-		//we could randomize between basic enemy and fierce enemy
 
-		//something irrelevant for now, that we can potentially use later
-		randomPlace = Random.Range (0, 1);
-		switch (randomPlace) {
-		case 0:
-
-
-			break;
-		case 1:
-
-
-			break;
-		}
-		
 		Enemy1 newEnemy = (Enemy1)Instantiate (enemy1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
 		Enemy2 newEnemy2 = (Enemy2)Instantiate (enemy2, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
+
+		newEnemy.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
+		newEnemy2.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
 
 		newEnemy.gameObject.SetActive (true);
 		newEnemy2.gameObject.SetActive (true);
 
 	}
+	
 }

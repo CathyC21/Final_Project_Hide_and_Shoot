@@ -4,21 +4,70 @@ using System.Collections;
 public class UpdatedEnemy1 : MonoBehaviour {
 	
 	public float rotationSpeed; // should be the same as the player rotation speed;
-	public float moveSpeed; // how quickly enemies will move, should be identical to the player's moveSpeed
-	public float laziness; // how likely an emeny is to notmove from 0 to 1
-	public float fidelity; // how likely an enemy is to move in the same direction as the player from 0 to 1
-	public float jitters; //  how likey an enemy is move on there own from 0 to 1 (unimplemented)
+	public float moveSpeed;// how quickly enemies will move, should be identical to the player's moveSpeed
+	
+	public float laziness;// how likely an emeny is to notmove from 0 to 1
+	public float fidelity;// how likely an enemy is to move in the same direction as the player from 0 to 1
+	public float jitters;//  how likey an enemy is move on there own from 0 to 1 (unimplemented)
+	public float tick= .1f;// the tick length of the jitter AI
+	public float minAttentionSpan= 5;//the shortest time in ticks that the AI will wait to make an idependent descion
+	public float maxAttentionSpan= 20;//the longest time in ticks that the AI will wait to make an idependent descion
+
+	private float moveAttention = 0;
+	private float turnAttention = 0;
 	private int forward = 0;
 	private int turn  = 0;
 
-	public Bullet bullet;
 	public Player1 player1;
+	public Bullet bullet;
 
 	
 	// Use this for initialization
 	
 	void Start () {
+		InvokeRepeating ("Jitter", 0.0f, tick);
+	}
 
+	void makeRandomMove() {
+		if(Random.value < .4){
+			forward= 0;
+		} else if (Random.value < .5) {
+			forward = 1;
+		} else {
+			forward = -1;
+		}
+
+	}
+	void makeRandomTurn() {
+		if(Random.value < .4) {
+			turn = 0;
+		} else if (Random.value < .5) {
+			turn = 1;
+		} else {
+			turn = -1;
+		}
+	}
+
+	void Jitter() {
+
+		if (moveAttention <= 0) {
+			moveAttention = Random.Range(minAttentionSpan,maxAttentionSpan);
+			if (Random.value<jitters)
+			{
+				makeRandomMove();
+			}
+		} else {
+			moveAttention--;
+		}
+		if (turnAttention <= 0) {
+			turnAttention = Random.Range(minAttentionSpan/3,maxAttentionSpan/3);
+			if (Random.value<jitters)
+			{
+				makeRandomTurn();
+			}
+		} else {
+			turnAttention--;
+		}
 	}
 	
 	// Update is called once per frame

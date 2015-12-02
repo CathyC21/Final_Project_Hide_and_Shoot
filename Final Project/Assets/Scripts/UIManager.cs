@@ -84,17 +84,16 @@ public class UIManager : MonoBehaviour {
 			player1.bulletCounter = maxBullets;
 		}
 
-		// if player1 collects ammo 
-		if (player1.collectedAmmo) {
-			player1.bulletCounter += player1.ammo;
-		}
-
 		// if player2 uses bullet, remove from UI
 		p2bullets.text = player2.bulletCounter + " ";
 
+		// bullet reset
 		if (player2.bulletReset) {
 			player2.bulletCounter = maxBullets;
 		}
+
+		// is player2 collects ammo
+
 
 	}	
 }

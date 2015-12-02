@@ -126,17 +126,22 @@ public class Player1 : MonoBehaviour {
 	void OnCollisionEnter (Collision col){
 		
 		if (col.collider.tag == "Enemy") {
-			currentHealth -= 5;
+			currentHealth -= 1;
 		}
 
 		if (col.collider.tag == "Bullet") {
 			currentHealth -= bulletPower1;
 		}
 
+		// if player colliders with ammo, pick up ammo
 		if (col.collider.tag == "Ammo") {
 			collectedAmmo = true;
-		} else {
+			// destroy that game object
+			col.gameObject.SetActive(false);
+			bulletCounter += ammo;
 
+		} else {
+			collectedAmmo = false;
 		}
 	}
 	

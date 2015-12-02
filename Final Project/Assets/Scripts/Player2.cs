@@ -121,7 +121,7 @@ public class Player2 : MonoBehaviour {
 	void OnCollisionEnter (Collision col){
 		
 		if (col.collider.tag == "Enemy") {
-			currentHealth -= 5;
+			currentHealth -= 1;
 		}
 		
 		if (col.collider.tag == "Bullet") {

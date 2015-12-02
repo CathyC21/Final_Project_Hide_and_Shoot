@@ -17,29 +17,28 @@ public class Teleporter : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter (Collider other){
-		if (other.GetComponent<Rigidbody>())
-			Debug.Log("Test");
+
+		Debug.Log (other.gameObject.name);
+
+		if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy"){
 		
-		if(!teleported)
-		{
+			if (!teleported) {
 			
-			if (Random.value<0.5)
-			{
-				teleOut1.teleported = true;
-				other.transform.position = teleOut1.transform.position;
+				if (Random.value < 0.5) {
+					teleOut1.teleported = true;
+					other.transform.position = teleOut1.transform.position;
 				
 				
+				} else {
+					teleOut2.teleported = true;
+					other.transform.position = teleOut2.transform.position;
+				
+				
+				}
 			}
-			else
-			{
-				teleOut2.teleported = true;
-				other.transform.position = teleOut2.transform.position;
-				
-				
-			}
+		
+		
 		}
-		
-		
 	}
 	
 	void OnTriggerExit(Collider other)
