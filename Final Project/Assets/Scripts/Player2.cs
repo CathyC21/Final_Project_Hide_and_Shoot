@@ -70,7 +70,7 @@ public class Player2 : MonoBehaviour {
 		}
 
 		// shoot
-		if (Input.GetKeyDown (KeyCode.RightShift)) {
+		if (Input.GetKeyDown (KeyCode.RightShift) && bulletCounter > 0) {
 			Shoot ();
 			isShooting = true;
 			//sound 
@@ -80,9 +80,17 @@ public class Player2 : MonoBehaviour {
 			isShooting = false;
 		}
 
+		if (bulletCounter <= 0) {
+			isShooting = false;
+		}
+
 		// track how many bullets player has used
 		if (bulletCounter <= 0) {
 			canShoot = false;
+		}
+
+		if (bulletCounter > 0) {
+			canShoot = true;
 		}
 
 
@@ -128,10 +136,15 @@ public class Player2 : MonoBehaviour {
 			currentHealth -= bulletPower2;
 		}
 
+		// if player colliders with ammo, pick up ammo
 		if (col.collider.tag == "Ammo") {
 			collectedAmmo = true;
-		} else {
+			// destroy that game object
+			col.gameObject.SetActive(false);
+			bulletCounter += ammo;
 			
+		} else {
+			collectedAmmo = false;
 		}
 	}
 	

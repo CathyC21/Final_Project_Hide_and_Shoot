@@ -71,7 +71,7 @@ public class Player1 : MonoBehaviour {
 		}
 
 		// shoot
-		if (Input.GetKeyDown (KeyCode.R)) {
+		if (Input.GetKeyDown (KeyCode.R) && bulletCounter > 0) {
 			Shoot ();
 			isShooting = true;
 			//sound 
@@ -81,9 +81,18 @@ public class Player1 : MonoBehaviour {
 			isShooting = false;
 		}
 
+		// don't trigger sound when player shoots but has no bullets
+		if (bulletCounter <= 0) {
+			isShooting = false;
+		}
+
 		// track how many bullets player has used
 		if (bulletCounter <= 0) {
 			canShoot = false;
+		}
+
+		if (bulletCounter > 0) {
+			canShoot = true;
 		}
 		
 		// player movement

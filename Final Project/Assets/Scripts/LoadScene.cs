@@ -24,6 +24,13 @@ public class LoadScene : MonoBehaviour {
 			Application.LoadLevel (1);
 		}
 
+		if (Input.anyKeyDown) {
+			Debug.Log ("anyKeyDown");
+
+			text.text = "Loading...";
+			Application.LoadLevel (1);
+		}
+
 	}
 
 	// triggered in button onclick events

@@ -6,9 +6,11 @@ public class GameManager : MonoBehaviour {
 	public Player1 player1;
 	public Player2 player2;
 	
-	public Enemy1 enemy1;
-	public Enemy2 enemy2;
-	
+	public UpdatedEnemy1 enemy1;
+	public UpdatedEnemy2 enemy2;
+
+	public GameObject ammunition;
+
 	public Transform[] spawnPoints;
 
 	private int randomPlace;
@@ -19,7 +21,9 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		InvokeRepeating ("spawnEnemy", 1.0f, 5.0f);
+		InvokeRepeating ("spawnEnemy", 1.0f, 7.0f);
+
+		InvokeRepeating("spawnAmmo", 1.0f, 10.0f);
 
 		// move players to random position
 		player1.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
@@ -33,6 +37,9 @@ public class GameManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			Application.LoadLevel(0);
 		}
+
+		// if spawned ammo and enemies are above 10+ then cancelinvoke
+
 		
 	}
 
@@ -41,7 +48,17 @@ public class GameManager : MonoBehaviour {
 //		Player2 newPlayer2 = (Player2)Instantiate (player1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
 //
 //	}
-	
+
+	void spawnAmmo() {
+
+		Instantiate(ammunition);
+
+		ammunition.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
+
+		ammunition.gameObject.SetActive(true);
+
+	}
+
 	void spawnEnemy() {
 
 		Enemy1 newEnemy = (Enemy1)Instantiate (enemy1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
