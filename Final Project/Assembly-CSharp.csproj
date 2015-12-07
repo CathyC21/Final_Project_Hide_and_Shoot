@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Enemy1.cs" />
      <Compile Include="Assets\Scripts\Enemy2.cs" />
+     <Compile Include="Assets\Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\LoadScene.cs" />
      <Compile Include="Assets\Scripts\Player1.cs" />
@@ -56,9 +57,11 @@
      <Compile Include="Assets\Scripts\SpeedZoneLeft.cs" />
      <Compile Include="Assets\Scripts\SpeedZoneRight.cs" />
      <Compile Include="Assets\Scripts\Teleporter.cs" />
+     <Compile Include="Assets\Scripts\ThemeSong.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\UpdatedEnemy1.cs" />
      <Compile Include="Assets\Scripts\UpdatedEnemy2.cs" />
+     <Compile Include="Assets\Scripts\gameOver.cs" />
      <None Include="Assets\Fonts\slave_only_dreams_to_be_king\Read me.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour {
 	
 	public Player1 player1;
 	public Player2 player2;
-	
+
 	public UpdatedEnemy1 enemy1;
 	public UpdatedEnemy2 enemy2;
 
@@ -15,14 +15,30 @@ public class GameManager : MonoBehaviour {
 
 	private int randomPlace;
 
-	public float left;
-	public float right;
-	
+	public int totalEnemies;
+	public int totalAmmo;
+
+//	private static GameManager instanceRef;
+
+	// to carry information from scene to scene, but to avoid more than 1 gameObject of this.
+//	void Awake() {
+//
+//		if (instanceRef == null) {
+//			instanceRef = this;
+//			DontDestroyOnLoad (gameObject);
+//		} else {
+//			DestroyImmediate(gameObject);
+//		}
+//
+//	}
+
 	// Use this for initialization
 	void Start () {
+
+		// need to initialize all the variables here to avoid null reference error
+
 		
 		InvokeRepeating ("spawnEnemy", 1.0f, 7.0f);
-
 		InvokeRepeating("spawnAmmo", 1.0f, 10.0f);
 
 		// move players to random position
@@ -38,37 +54,53 @@ public class GameManager : MonoBehaviour {
 			Application.LoadLevel(0);
 		}
 
-		// if spawned ammo and enemies are above 10+ then cancelinvoke
+		if (player1.isDead || player2.isDead) {
+			Application.LoadLevel (2);
+		} else {
 
+		}
+
+		// cap the number of enemies and ammo
+		if (totalAmmo >= 10) {
+			CancelInvoke ("spawnAmmo");
+			Debug.Log ("spawnAmmo cancelled");
+			totalAmmo = 0;
+
+		} else {
+
+		}
+	
+		if (totalEnemies >= 10) {
+			CancelInvoke ("spawnAmmo");
+			Debug.Log ("spawnEnemy cancelled");
+			totalEnemies = 0;
+
+		} else {
+
+		}
 		
 	}
-
-//	void spawnPlayers() {
-//		Player1 newPlayer = (Player1)Instantiate (player1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
-//		Player2 newPlayer2 = (Player2)Instantiate (player1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
-//
-//	}
 
 	void spawnAmmo() {
 
 		Instantiate(ammunition);
-
 		ammunition.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
-
 		ammunition.gameObject.SetActive(true);
-
+		totalAmmo += 1;
 	}
 
 	void spawnEnemy() {
 
-		Enemy1 newEnemy = (Enemy1)Instantiate (enemy1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
-		Enemy2 newEnemy2 = (Enemy2)Instantiate (enemy2, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
+		UpdatedEnemy1 newEnemy = (UpdatedEnemy1)Instantiate (enemy1, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
+		UpdatedEnemy2 newEnemy2 = (UpdatedEnemy2)Instantiate (enemy2, spawnPoints [Random.Range (0, spawnPoints.Length)].position, Quaternion.identity);
 
 		newEnemy.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
 		newEnemy2.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
 
 		newEnemy.gameObject.SetActive (true);
 		newEnemy2.gameObject.SetActive (true);
+
+		totalEnemies += 2;
 
 	}
 	

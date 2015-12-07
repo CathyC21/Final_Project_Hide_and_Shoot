@@ -19,7 +19,7 @@ public class UpdatedEnemy2 : MonoBehaviour {
 	private int turn  = 0;
 
 	public Player2 player2;
-	public Bullet bullet;
+	public EnemyBullet bullet;
 	
 	
 	// Use this for initialization
@@ -188,7 +188,7 @@ public class UpdatedEnemy2 : MonoBehaviour {
 	
 	void Shoot(){
 		// instantiate new bullet and set it equal to newBullet
-		Bullet newBullet = (Bullet) Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
+		EnemyBullet newBullet = (EnemyBullet) Instantiate (bullet, transform.position + transform.forward, Quaternion.identity);
 		newBullet.direction = transform.forward;
 		
 	}

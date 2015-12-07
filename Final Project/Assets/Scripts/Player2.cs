@@ -7,6 +7,7 @@ public class Player2 : MonoBehaviour {
 	public float currentHealth;
 	public float maxHealth;
 	public int lives;
+	public bool isDead = false;
 	
 	[Header("Movement")]
 	public float moveSpeed;
@@ -28,12 +29,19 @@ public class Player2 : MonoBehaviour {
 	public int ammo;
 	
 	[Header("Enemy")]
-	public Enemy2 enemy2;
+	public UpdatedEnemy2 enemy2;
 	
 	[Header("Music")]
 	public AudioSource sfx;
 	public AudioClip sfx_gun;
 	public AudioClip death;
+	public AudioClip sfx_hit;
+
+	public static int player2score;
+
+	void Awake () {
+		//player2score = 0;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -63,10 +71,13 @@ public class Player2 : MonoBehaviour {
 			bulletReset = false;
 		}
 		
-		if (lives == 0) {
-			gameObject.SetActive(false);
-
+		if (lives <= 0) {
+			//gameObject.SetActive (false);
+			isDead = true;
+			Player1.player1score += 1;
 			// stop spawning enemies
+		} else {
+			isDead = false;
 		}
 
 		// shoot
@@ -132,8 +143,16 @@ public class Player2 : MonoBehaviour {
 			currentHealth -= 1;
 		}
 		
-		if (col.collider.tag == "Bullet") {
+		if (col.collider.tag == "p1bullet") {
 			currentHealth -= bulletPower2;
+			sfx.clip = sfx_hit;
+			sfx.Play();
+		}
+
+		if (col.collider.tag == "EnemyBullet") {
+			currentHealth -= 5;
+			sfx.clip = sfx_hit;
+			sfx.Play();
 		}
 
 		// if player colliders with ammo, pick up ammo

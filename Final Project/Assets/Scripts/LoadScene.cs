@@ -15,6 +15,8 @@ public class LoadScene : MonoBehaviour {
 		StartCoroutine (WaitToLoad ());
 		loadingScene = false;
 		sceneLoaded = false;
+		Player1.player1score = 0;
+		Player2.player2score = 0;
 	}
 	
 	// Update is called once per frame
