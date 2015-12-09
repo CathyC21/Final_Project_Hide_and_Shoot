@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
 
 		
 		InvokeRepeating ("spawnEnemy", 1.0f, 7.0f);
-		InvokeRepeating("spawnAmmo", 1.0f, 10.0f);
+		InvokeRepeating("spawnAmmo", 1.0f, 7.0f);
 
 		// move players to random position
 		player1.transform.position = new Vector3 (Random.Range (-7, 7), 1.39f, Random.Range (-7, 7));
@@ -61,17 +61,17 @@ public class GameManager : MonoBehaviour {
 		}
 
 		// cap the number of enemies and ammo
-		if (totalAmmo >= 10) {
-			CancelInvoke ("spawnAmmo");
-			Debug.Log ("spawnAmmo cancelled");
-			totalAmmo = 0;
-
-		} else {
-
-		}
+//		if (totalAmmo >= 10) {
+//			CancelInvoke ("spawnAmmo");
+//			Debug.Log ("spawnAmmo cancelled");
+//			totalAmmo = 0;
+//
+//		} else {
+//
+//		}
 	
 		if (totalEnemies >= 10) {
-			CancelInvoke ("spawnAmmo");
+			CancelInvoke ("spawnEnemy");
 			Debug.Log ("spawnEnemy cancelled");
 			totalEnemies = 0;
 

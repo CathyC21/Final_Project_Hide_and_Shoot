@@ -195,7 +195,15 @@ public class UpdatedEnemy2 : MonoBehaviour {
 	
 	void OnCollisionEnter (Collision col){
 		
-		if (col.collider.tag == "Bullet") {
+		if (col.collider.tag == "p1bullet") {
+			gameObject.SetActive (false);
+		}
+		
+		if (col.collider.tag == "p2bullet") {
+			gameObject.SetActive (false);
+		}
+		
+		if (col.collider.tag == "EnemyBullet") {
 			gameObject.SetActive (false);
 		}
 	}
